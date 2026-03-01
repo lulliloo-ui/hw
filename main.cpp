@@ -147,4 +147,19 @@ BiList< T > * prev(BiList< T > * h) noexcept
 
 
 int main()
-{}
+{
+  int array[5] = {1, 2, 3, 4, 5};
+  BiList< int > * a = create(array[0]);
+  BiList< int > * head = a;
+  for (size_t i = 1; i < 5; ++i) {
+    try {
+      a = insert_after(a, array[i]);
+    } catch (const std::bad_alloc& e) {
+      std::cerr << "couldn't allocate memory\n";
+      clear_all(head);
+      return 1;
+    }
+  }
+  clear_all(head);
+  return 0;
+}
